@@ -2,9 +2,13 @@
 
 > My doozie Nuxt.js project
 
+## Environment
+
+node v8.12.0; npm 6.4.1;
+
 ## Build Setup
 
-``` bash
+```bash
 # install dependencies
 $ npm install
 
