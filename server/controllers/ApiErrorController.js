@@ -53,7 +53,16 @@ var feachAdpter = fecha;
 var ApiErrorController = /** @class */ (function () {
     function ApiErrorController() {
     }
-    ApiErrorController.prototype.search = function (req, res) {
+    ApiErrorController.prototype.searchGet = function (req, res) {
+        return __awaiter(this, void 0, void 0, function () {
+            var rstData;
+            return __generator(this, function (_a) {
+                rstData = ['北京', '上海'];
+                return [2 /*return*/, rstData];
+            });
+        });
+    };
+    ApiErrorController.prototype.searchPost = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
             var rstData;
             return __generator(this, function (_a) {
@@ -68,7 +77,14 @@ var ApiErrorController = /** @class */ (function () {
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [Object, Object]),
         __metadata("design:returntype", Promise)
-    ], ApiErrorController.prototype, "search", null);
+    ], ApiErrorController.prototype, "searchGet", null);
+    __decorate([
+        routing_controllers_1.Post('/search'),
+        __param(0, routing_controllers_1.Req()), __param(1, routing_controllers_1.Res()),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", [Object, Object]),
+        __metadata("design:returntype", Promise)
+    ], ApiErrorController.prototype, "searchPost", null);
     ApiErrorController = __decorate([
         routing_controllers_1.JsonController('/error')
     ], ApiErrorController);

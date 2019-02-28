@@ -4,10 +4,8 @@
       <logo/>
       <h1 class="title">mt-app</h1>
       <h2 class="subtitle">My doozie Nuxt.js project</h2>
-      <div class="links">
-        <a href="https://nuxtjs.org/" target="_blank" class="button--green">Documentation</a>
-        <a href="https://github.com/nuxt/nuxt.js" target="_blank" class="button--grey">GitHub</a>
-      </div>
+      <div>后台数据如下：</div>
+      <div class="links" v-for="item in list" :key="item">{{item}}</div>
     </div>
   </section>
 </template>
@@ -16,8 +14,26 @@
 import Logo from '~/components/Logo.vue';
 
 export default {
+  data() {
+    return {
+      list: []
+    };
+  },
   components: {
     Logo
+  },
+  async asyncData(ctx) {
+    let { status, data } = await ctx.$axios.post('/api/error/search');
+
+    if (status === 200 && data.length) {
+      return {
+        list: data
+      };
+    }
+  },
+  mounted() {},
+  methods: {
+    loadData: async function() {}
   }
 };
 </script>

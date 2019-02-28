@@ -10,7 +10,13 @@ const feachAdpter: any = fecha;
 @JsonController('/error')
 export class ApiErrorController {
   @Get('/search')
-  async search(@Req() req: Request, @Res() res: Response) {
+  async searchGet(@Req() req: Request, @Res() res: Response) {
+    let rstData = ['北京', '上海'];
+
+    return rstData;
+  }
+  @Post('/search')
+  async searchPost(@Req() req: Request, @Res() res: Response) {
     let rstData = ['北京', '上海'];
 
     return rstData;
