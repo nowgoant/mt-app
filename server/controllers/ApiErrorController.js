@@ -51,6 +51,7 @@ var routing_controllers_1 = require("routing-controllers");
 var axios_1 = require("axios");
 var fecha = require("fecha");
 var esQuery_1 = require("./../common/esQuery");
+var feachAdpter = fecha;
 var ApiErrorController = /** @class */ (function () {
     function ApiErrorController() {
     }
@@ -60,7 +61,7 @@ var ApiErrorController = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        startDate = fecha.format(new Date(), 'YYYY-MM-DD');
+                        startDate = feachAdpter.format(new Date(), 'YYYY-MM-DD');
                         url = "http://jrapp-es.jdfmgt.com/jrmdp-h5-business-" + startDate + "/_search";
                         query = esQuery_1.default();
                         return [4 /*yield*/, axios_1.default.post(url, query)];
