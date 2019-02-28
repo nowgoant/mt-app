@@ -1,0 +1,1 @@
+{"version":3,"file":"ResultData.js","sourceRoot":"","sources":["../../tserver/view/ResultData.ts"],"names":[],"mappings":";;AAMA;IAIE,oBACE,UAAkB,EAClB,SAAiB,EACjB,UAA+B;QAE/B,IAAI,CAAC,UAAU,GAAG,UAAU,IAAI,GAAG,CAAA;QACnC,IAAI,CAAC,SAAS,GAAG,SAAS,IAAI,IAAI,CAAA;QAClC,IAAI,CAAC,UAAU,GAAG,UAAU,CAAA;IAC9B,CAAC;IACH,iBAAC;AAAD,CAAC,AAbD,IAaC"}

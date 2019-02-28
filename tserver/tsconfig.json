@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "paths": { "*": ["types/*"] },
     "target": "es5",
     "moduleResolution": "node",
     "module": "commonjs",
@@ -24,6 +25,6 @@
     "listFiles": false
   },
   "include": ["**/*"],
-  "exclude": ["node_modules"],
+  "exclude": ["../node_modules"],
   "compileOnSave": false
 }

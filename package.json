@@ -14,11 +14,18 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
+    "@nuxtjs/axios": "5.3.6",
     "cross-env": "5.2.0",
-    "nuxt": "2.4.0",
-    "koa": "2.6.2",
     "element-ui": "2.4.11",
-    "@nuxtjs/axios": "5.3.6"
+    "fecha": "3.0.2",
+    "koa": "2.6.2",
+    "koa-bodyparser": "^4.2.1",
+    "koa-router": "8.0.0-alpha.1",
+    "nuxt": "2.4.0",
+    "reflect-metadata": "0.1.13",
+    "routing-controllers": "0.7.7",
+    "sequelize": "4.42.1",
+    "sequelize-typescript": "0.6.7"
   },
   "devDependencies": {
     "@types/node": "^11.9.5",
