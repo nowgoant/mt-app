@@ -1,16 +1,4 @@
 "use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var __param = (this && this.__param) || function (paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -46,29 +34,20 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
-var routing_controllers_1 = require("routing-controllers");
-var ApiErrorController = /** @class */ (function () {
-    function ApiErrorController() {
-    }
-    ApiErrorController.prototype.search = function (req, res) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                return [2 /*return*/, ['北京', '天津']];
-            });
-        });
-    };
-    __decorate([
-        routing_controllers_1.Get('/search'),
-        __param(0, routing_controllers_1.Req()), __param(1, routing_controllers_1.Res()),
-        __metadata("design:type", Function),
-        __metadata("design:paramtypes", [Object, Object]),
-        __metadata("design:returntype", Promise)
-    ], ApiErrorController.prototype, "search", null);
-    ApiErrorController = __decorate([
-        routing_controllers_1.JsonController('/error')
-    ], ApiErrorController);
-    return ApiErrorController;
-}());
-exports.ApiErrorController = ApiErrorController;
-//# sourceMappingURL=ApiErrorController.js.map
+var Router = require("koa-router");
+var router = new Router({
+    prefix: '/city'
+});
+router.get('/list', function (ctx) { return __awaiter(_this, void 0, void 0, function () {
+    return __generator(this, function (_a) {
+        ctx.status = 200;
+        ctx.body = {
+            list: ['北京', '天津']
+        };
+        return [2 /*return*/];
+    });
+}); });
+exports.default = router;
+//# sourceMappingURL=city.js.map

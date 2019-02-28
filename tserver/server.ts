@@ -19,7 +19,8 @@ export class Server {
        * We can add options about how routing-controllers should configure itself.
        * Here we specify what controllers should be registered in our express server.
        */
-      controllers: [join(__dirname, '/controllers/**/*')]
+      controllers: [join(__dirname, '/controllers/**/*')],
+      routePrefix: '/api'
     });
   };
 
@@ -39,11 +40,23 @@ export class Server {
 
     this.setRoutes();
 
-    app.use(ctx => {
+    app.use(async (ctx, next) => {
       ctx.status = 200;
-      ctx.respond = false; // Bypass Koa's built-in response handling
-      ctx.req.ctx = ctx; // This might be useful later on, e.g. in nuxtServerInit or with nuxt-stash
-      nuxt.render(ctx.req, ctx.res);
+      // if (ctx.originalUrl.indexOf('/api') === 0) {
+      //   // consola.log('1212', ctx.originalUrl);
+      //   await next();
+      // }
+      // {
+      // koa defaults to 404 when it sees that status is unset
+      return new Promise((resolve, reject) => {
+        ctx.res.on('close', resolve);
+        ctx.res.on('finish', resolve);
+        nuxt.render(ctx.req, ctx.res, promise => {
+          // nuxt.render passes a rejected promise into callback on error.
+          promise.then(resolve).catch(reject);
+        });
+      });
+      // }
     });
 
     app.listen(port, host);

@@ -19,8 +19,8 @@
     "element-ui": "2.4.11",
     "fecha": "3.0.2",
     "koa": "2.6.2",
-    "koa-bodyparser": "^4.2.1",
-    "koa-router": "8.0.0-alpha.1",
+    "koa-bodyparser": "4.2.1",
+    "koa-router": "7.4.0",
     "nuxt": "2.4.0",
     "reflect-metadata": "0.1.13",
     "routing-controllers": "0.7.7",
@@ -28,6 +28,7 @@
     "sequelize-typescript": "0.6.7"
   },
   "devDependencies": {
+    "@types/koa": "^2.0.48",
     "@types/node": "^11.9.5",
     "eslint": "3.14.1",
     "eslint-config-prettier": "3.1.0",

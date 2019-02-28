@@ -52,7 +52,8 @@ var Server = /** @class */ (function () {
                  * We can add options about how routing-controllers should configure itself.
                  * Here we specify what controllers should be registered in our express server.
                  */
-                controllers: [path_1.join(__dirname, '/controllers/**/*')]
+                controllers: [path_1.join(__dirname, '/controllers/**/*')],
+                routePrefix: '/api'
             });
         };
         //When hosting a client app such as angular - map the path to the client dist folder
@@ -75,6 +76,7 @@ var Server = /** @class */ (function () {
     Server.prototype.startServer = function () {
         return __awaiter(this, void 0, void 0, function () {
             var nuxt, _a, _b, host, _c, port, builder;
+            var _this = this;
             return __generator(this, function (_d) {
                 switch (_d.label) {
                     case 0:
@@ -92,12 +94,25 @@ var Server = /** @class */ (function () {
                         _d.label = 4;
                     case 4:
                         this.setRoutes();
-                        app.use(function (ctx) {
-                            ctx.status = 200;
-                            ctx.respond = false; // Bypass Koa's built-in response handling
-                            ctx.req.ctx = ctx; // This might be useful later on, e.g. in nuxtServerInit or with nuxt-stash
-                            nuxt.render(ctx.req, ctx.res);
-                        });
+                        app.use(function (ctx, next) { return __awaiter(_this, void 0, void 0, function () {
+                            return __generator(this, function (_a) {
+                                ctx.status = 200;
+                                // if (ctx.originalUrl.indexOf('/api') === 0) {
+                                //   // consola.log('1212', ctx.originalUrl);
+                                //   await next();
+                                // }
+                                // {
+                                // koa defaults to 404 when it sees that status is unset
+                                return [2 /*return*/, new Promise(function (resolve, reject) {
+                                        ctx.res.on('close', resolve);
+                                        ctx.res.on('finish', resolve);
+                                        nuxt.render(ctx.req, ctx.res, function (promise) {
+                                            // nuxt.render passes a rejected promise into callback on error.
+                                            promise.then(resolve).catch(reject);
+                                        });
+                                    })];
+                            });
+                        }); });
                         app.listen(port, host);
                         consola.ready({
                             message: "Server listening on http://" + host + ":" + port,
