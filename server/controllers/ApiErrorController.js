@@ -48,14 +48,31 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var routing_controllers_1 = require("routing-controllers");
+var axios_1 = require("axios");
+var fecha = require("fecha");
+var esQuery_1 = require("./../common/esQuery");
 var ApiErrorController = /** @class */ (function () {
     function ApiErrorController() {
     }
     ApiErrorController.prototype.search = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
+            var startDate, url, query, data, originData, rstData;
             return __generator(this, function (_a) {
-                // console.log('search', req.url);
-                return [2 /*return*/, ['北京', '天津']];
+                switch (_a.label) {
+                    case 0:
+                        startDate = fecha.format(new Date(), 'YYYY-MM-DD');
+                        url = "http://jrapp-es.jdfmgt.com/jrmdp-h5-business-" + startDate + "/_search";
+                        query = esQuery_1.default();
+                        return [4 /*yield*/, axios_1.default.post(url, query)];
+                    case 1:
+                        data = (_a.sent()).data;
+                        originData = data.hits && data.hits.hits;
+                        rstData = [];
+                        if (originData && originData.length) {
+                            rstData = originData;
+                        }
+                        return [2 /*return*/, rstData];
+                }
             });
         });
     };
