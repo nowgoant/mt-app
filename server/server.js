@@ -41,6 +41,7 @@ var _a = require('nuxt'), Nuxt = _a.Nuxt, Builder = _a.Builder;
 // import chalk from 'chalk';
 var path_1 = require("path");
 var routing_controllers_1 = require("routing-controllers");
+var routePrefix = '/api';
 var app = new Koa();
 var config = require('../nuxt.config.js');
 config.dev = !(app.env === 'production');
@@ -53,7 +54,7 @@ var Server = /** @class */ (function () {
                  * Here we specify what controllers should be registered in our express server.
                  */
                 controllers: [path_1.join(__dirname, '/controllers/**/*')],
-                routePrefix: '/api'
+                routePrefix: routePrefix
             });
         };
         //When hosting a client app such as angular - map the path to the client dist folder
@@ -96,21 +97,26 @@ var Server = /** @class */ (function () {
                         this.setRoutes();
                         app.use(function (ctx, next) { return __awaiter(_this, void 0, void 0, function () {
                             return __generator(this, function (_a) {
-                                ctx.status = 200;
-                                // if (ctx.originalUrl.indexOf('/api') === 0) {
-                                //   // consola.log('1212', ctx.originalUrl);
-                                //   await next();
-                                // }
-                                // {
-                                // koa defaults to 404 when it sees that status is unset
-                                return [2 /*return*/, new Promise(function (resolve, reject) {
-                                        ctx.res.on('close', resolve);
-                                        ctx.res.on('finish', resolve);
-                                        nuxt.render(ctx.req, ctx.res, function (promise) {
-                                            // nuxt.render passes a rejected promise into callback on error.
-                                            promise.then(resolve).catch(reject);
-                                        });
-                                    })];
+                                switch (_a.label) {
+                                    case 0:
+                                        if (!(ctx.originalUrl.indexOf(routePrefix) === 0)) return [3 /*break*/, 2];
+                                        return [4 /*yield*/, next()];
+                                    case 1:
+                                        _a.sent();
+                                        return [3 /*break*/, 3];
+                                    case 2:
+                                        ctx.status = 200;
+                                        // koa defaults to 404 when it sees that status is unset
+                                        return [2 /*return*/, new Promise(function (resolve, reject) {
+                                                ctx.res.on('close', resolve);
+                                                ctx.res.on('finish', resolve);
+                                                nuxt.render(ctx.req, ctx.res, function (promise) {
+                                                    // nuxt.render passes a rejected promise into callback on error.
+                                                    promise.then(resolve).catch(reject);
+                                                });
+                                            })];
+                                    case 3: return [2 /*return*/];
+                                }
                             });
                         }); });
                         app.listen(port, host);

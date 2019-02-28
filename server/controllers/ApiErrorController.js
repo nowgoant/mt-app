@@ -54,6 +54,7 @@ var ApiErrorController = /** @class */ (function () {
     ApiErrorController.prototype.search = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
+                // console.log('search', req.url);
                 return [2 /*return*/, ['北京', '天津']];
             });
         });

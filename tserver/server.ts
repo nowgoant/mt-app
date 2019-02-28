@@ -6,6 +6,7 @@ const { Nuxt, Builder } = require('nuxt');
 import { join } from 'path';
 import { useKoaServer } from 'routing-controllers';
 
+const routePrefix = '/api';
 const app = new Koa();
 let config = require('../nuxt.config.js');
 config.dev = !(app.env === 'production');
@@ -20,7 +21,7 @@ export class Server {
        * Here we specify what controllers should be registered in our express server.
        */
       controllers: [join(__dirname, '/controllers/**/*')],
-      routePrefix: '/api'
+      routePrefix: routePrefix
     });
   };
 
@@ -41,22 +42,20 @@ export class Server {
     this.setRoutes();
 
     app.use(async (ctx, next) => {
-      ctx.status = 200;
-      // if (ctx.originalUrl.indexOf('/api') === 0) {
-      //   // consola.log('1212', ctx.originalUrl);
-      //   await next();
-      // }
-      // {
-      // koa defaults to 404 when it sees that status is unset
-      return new Promise((resolve, reject) => {
-        ctx.res.on('close', resolve);
-        ctx.res.on('finish', resolve);
-        nuxt.render(ctx.req, ctx.res, promise => {
-          // nuxt.render passes a rejected promise into callback on error.
-          promise.then(resolve).catch(reject);
+      if (ctx.originalUrl.indexOf(routePrefix) === 0) {
+        await next();
+      } else {
+        ctx.status = 200;
+        // koa defaults to 404 when it sees that status is unset
+        return new Promise((resolve, reject) => {
+          ctx.res.on('close', resolve);
+          ctx.res.on('finish', resolve);
+          nuxt.render(ctx.req, ctx.res, promise => {
+            // nuxt.render passes a rejected promise into callback on error.
+            promise.then(resolve).catch(reject);
+          });
         });
-      });
-      // }
+      }
     });
 
     app.listen(port, host);

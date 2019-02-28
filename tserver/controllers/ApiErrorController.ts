@@ -5,6 +5,7 @@ import { Request, Response } from 'koa';
 export class ApiErrorController {
   @Get('/search')
   async search(@Req() req: Request, @Res() res: Response) {
+    // console.log('search', req.url);
     return ['北京', '天津'];
   }
 }
