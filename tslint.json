@@ -1,0 +1,7 @@
+{
+  "defaultSeverity": "warn",
+  "extends": ["tslint-config-standard"],
+  "rules": {
+    "prefer-const": true
+  }
+}
