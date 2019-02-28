@@ -11,16 +11,7 @@ const feachAdpter: any = fecha;
 export class ApiErrorController {
   @Get('/search')
   async search(@Req() req: Request, @Res() res: Response) {
-    const startDate = feachAdpter.format(new Date(), 'YYYY-MM-DD');
-    const url = `http://jrapp-es.jdfmgt.com/jrmdp-h5-business-${startDate}/_search`;
-    const query = esQuery();
-    const { data } = await axios.post(url, query);
-    const originData = data.hits && data.hits.hits;
-    let rstData = [];
-
-    if (originData && originData.length) {
-      rstData = originData;
-    }
+    let rstData = ['北京', '上海'];
 
     return rstData;
   }
